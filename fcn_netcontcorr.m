@@ -52,7 +52,7 @@ ncc_out.FCcomponents = FCcomponents;
 for bs=1:B
     nFCc_vec_all = FCcomponents(:,:,bs)';
    
-    for sc=1:3
+    for sc=1:size(cogscores,2)
         bscore = cogscores(:,sc);
         
         [BBcc,BBp] = corr(nFCc_vec_all,bscore,'rows','complete','type','s');

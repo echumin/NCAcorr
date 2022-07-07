@@ -17,6 +17,8 @@
 %   multcm - ['bonferroni' or 'fdr'] multiple comparison correction
 %            strategy for block level significance.
 %   corrP  - [0.05] multiple comparisons adjusted threshold.
+%   group  - provide a vector of group assignments. (give all ones for full
+%            sample for now)
 
 % get Functional Connectivity (FC) components for an input number of bins
 % from RSS ordered edge time series. 
@@ -37,6 +39,9 @@ scoreLabels = {'AttnProcSpeed','CogFunc','Memory'};
 
 %% Step3: Create summary figures.
 ncc_summary(ncc_out,scoreLabels,netLabels,group)
+% whole sample variant:
+ncc_summary(ncc_out,scoreLabels,netLabels,ones(size(ts,3)))
+
 
 
 

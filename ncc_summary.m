@@ -14,7 +14,7 @@ ax(1)=nexttile;
     title('RSS Bin Sets')
 ax(2)=nexttile(2, [1 2]);
     imagesc(ncc_out.plot)
-    xticks(1:1:3); xticklabels(cogLabels);
+    xticks(1:1:length(cogLabels)); xticklabels(cogLabels);
     yticks([])
     colorbar
 colormap (ax(1),[1 1 1 ; 0 0 0])
