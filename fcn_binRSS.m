@@ -26,6 +26,15 @@ function [FCcomponents, block_idx,dis] = fcn_binRSS(ts,sys_aff,binSets)
 [nSets,nBins] = size(binSets);
 binsz = floor(T/nBins);
 
+% bin percentiles
+tmp = 0:100/nBins:100;
+l1 = tmp(1:end-1);
+l2 = tmp(2:end);
+clear tmp
+for i=1:length(l1)
+    blabels{i}=[num2str(l1(i)) '-' num2str(l2(i)) '%'];
+end
+
 %crop timeseries on both ends to match bin size*number of bins
 t2c = (T-(binsz*nBins));
 if rem(t2c,2)==0 % even
@@ -46,13 +55,13 @@ end
 figure
 y1 = linspace(.5,1.5,S)';
 
+disp('Computing compoments for subject:')
 for s=1:S    
     disp(num2str(s))
     zts = zscore(squeeze(ts(:,sys_ord,s)));
     ets = fcn_edgets(zts);
     rss = nansum(ets.^2,2).^0.5;            % nansum will ignore nan edges
-    [~,rss2] = sort(rss,'ascend');
-    
+    [~,rss2] = sort(rss,'ascend');          % smallest to largest
     
     for i=1:nBins
         tp = rss2(binsz*(i-1)+1:binsz*i,1);
@@ -66,9 +75,7 @@ for s=1:S
         hold on
      %   plot([min(stp) max(stp)],zeros(2,1)+y1(s)+(i-1),'Color',ax.CData)
         dis(:,i,s)=diff(stp);
-    end
-    
-    
+    end  
     
     for bs=1:nSets
         id = find(binSets(bs,:)==1);
@@ -76,3 +83,8 @@ for s=1:S
         FCcomponents(:,s,bs) = nanmean(ets(frames,:),1); %nanmean will ignore contribution of nan edges
     end
 end
+xlabel('Time Series')
+ylabel('RSS Bins')
+yticks(1:1:nBins)
+yticklabels(blabels)
+title('Subject time points that fell in a particular RSS bin')
