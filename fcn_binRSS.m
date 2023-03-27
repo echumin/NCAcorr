@@ -1,4 +1,4 @@
-function [FCcomponents, block_idx,dis] = fcn_binRSS(ts,sys_aff,binSets)
+function [FCcomponents, block_idx,dis,RSSall] = fcn_binRSS(ts,sys_aff,binSets)
 %%                              RSS Binning                              %%
 % INPUTS
 %   ts      - 3D Time by Node by Subject matrix
@@ -16,7 +16,10 @@ function [FCcomponents, block_idx,dis] = fcn_binRSS(ts,sys_aff,binSets)
 %                   reordered time series.
 %   dis          -> nubmer of time points separation between adjacent
 %                   points within RSS bins.
-
+%   RSSall       -> timepoint-by-subject matrix of RSS values.
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
+%%
 [block_idx,sys_ord] = sort(sys_aff,'ascend');
 
 % Time by Node by Subject Time series
@@ -61,6 +64,7 @@ for s=1:S
     zts = zscore(squeeze(ts(:,sys_ord,s)));
     ets = fcn_edgets(zts);
     rss = nansum(ets.^2,2).^0.5;            % nansum will ignore nan edges
+    RSSall(:,s)=rss;
     [~,rss2] = sort(rss,'ascend');          % smallest to largest
     
     for i=1:nBins

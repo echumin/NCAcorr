@@ -33,12 +33,12 @@
 %  multcm  - ['bonferroni' or 'fdr'] multiple comparison correction
 %            strategy for block level significance.
 %  corrP   - [0.05] multiple comparisons adjusted threshold.
-%  group   - provide a vector of group assignments. (give all ones for full
-%            sample for now)
-
-% get Functional Connectivity (FC) components for an input number of bins
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
+%%
+% Get Functional Connectivity (FC) components for an input number of bins
 % from RSS ordered edge time series. 
-% Time series are ordered by the input network affilications
+% Here time series were already ordered by the input network affilications.
 
 %% Step 0: Add the NCAcorr package to path
     % I havent moved the wrapper, so working directory and its subdirectories
@@ -67,12 +67,10 @@ bins = [1,1,1,1,1;
 % Network and score label examples:
 netLabels = {'VIS','SOM','DAN','VAN','LIM','FRP','DMN'};
 scoreLabels = {'AttnProcSpeed','CogFunc','Memory'};
-% group -> subject group affilication vector (if applicable)
 
 %% Step3: Create summary figures.
-ncc_summary(ncc_out,scoreLabels,netLabels,group)
-% whole sample variant:
-ncc_summary(ncc_out,scoreLabels,netLabels,ones(size(ts,3)))
+ncc_summary(ncc_out,scoreLabels,netLabels)
+
 
 
 

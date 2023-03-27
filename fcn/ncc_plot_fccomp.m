@@ -1,5 +1,14 @@
 function ncc_plot_fccomp(ncc_out,sysLabels,bs)
-
+%%                   NCC Plot Blocks                   %%
+% INPUTS
+%   ncc_out      -> Data structure output by the fcn_netcontcorr code 
+%   sysLabels    -> Cell variable where elements are text labels for the
+%                   blocks used in the main code.
+%   bs           -> A vector of indices for which component blocks/bins you
+%                   want the blocks plotted.
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
+%%
 narginchk(2,3)
 
 load('fcn/colormaps.mat','bluered_cmap')

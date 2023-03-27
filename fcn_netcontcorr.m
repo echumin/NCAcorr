@@ -36,10 +36,11 @@ function [ncc_out] = fcn_netcontcorr(FCcomponents,binset,block_idx,cogscores,edg
 %  mc_thr        -> [0.05] multiple comparisons adjusted threshold.
 
 % OUTPUTS
-%   ncc_out -> a structural input/output variables needed for the summary
+%   ncc_out -> a structur of input/output variables needed for the summary
 %   code.
-
-
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
+%%
 narginchk(4,10)
 % edges, subjects, bins
 [K, S, B] = size(FCcomponents);
@@ -148,6 +149,8 @@ for bs=1:B % for every bin
                 end
             case 2
                 parfor r=1:nPerm
+                    % This gives the same outcome as null strategy 1 NBS,
+                    % so its commented out here.
 %                     [~,BBpr] = corr(nFCc_vec_all,bscore,'rows','complete','type','s');
 %                     temp = zeros(N); temp(inds) = BBpr; BBmat = temp+temp';
 %                     maskr = (BBmat<edge_thr).*~eye(N);

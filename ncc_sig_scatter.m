@@ -1,5 +1,18 @@
 function ncc_sig_scatter(FCcomponents,sig_block_idx,ncc_out,cogLabels,sysLabels,sig_flag)
-
+%%                   NCC Scatter Plots of Significance                   %%
+% INPUTS
+%   FCcomponents -> Obtained from fcn_binRSS.
+%   sig_block_idx-> Obtained from ncc_plot_blocks.
+%   ncc_out      -> Data structure output by the fcn_netcontcorr code 
+%   cogLabels    -> Cell variable where each element is a text label for
+%                   the behavioral domains correlated with FCc in the main code.
+%   sysLabels    -> Cell variable where elements are text labels for the
+%                   blocks used in the main code.
+%   sig_flag     -> Default=0; set to 1 to plots scatter of first-level
+%                   significant edges only.
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
+%%
 narginchk(5,6)
 
 [~,nSys,nBS,nSC] = size(ncc_out.modules_permP);

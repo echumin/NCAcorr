@@ -1,5 +1,13 @@
-function ncc_summary(ncc_out,cogLabels,sysLabels,group)
-
+function ncc_summary(ncc_out,cogLabels,sysLabels)
+%%                   NCC Summary                   %%
+% INPUTS
+%   ncc_out      -> Data structure output by the fcn_netcontcorr code 
+%   cogLabels    -> Cell variable where each element is a text label for
+%                   the behavioral domains correlated with FCc in the main code.
+%   sysLabels    -> Cell variable where elements are text labels for the
+%                   blocks used in the main code. 
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
 %%
 % 20k foot view, a binset by cog score matrix showing number of corrected
 % significance.
@@ -35,7 +43,7 @@ ncc_plot_edgecorr(ncc_out,cogLabels,sysLabels,[],[])
 
 % function that uses tiledlayout flow to plot scatter plots for all significant
 % blocks
-ncc_sig_scatter(ncc_out.FCcomponents,sig_block_idx,ncc_out,cogLabels,sysLabels,group,0)
+ ncc_sig_scatter(ncc_out.FCcomponents,sig_block_idx,ncc_out,cogLabels,sysLabels,0)
 
 % plot fc components
 ncc_plot_fccomp(ncc_out,sysLabels)

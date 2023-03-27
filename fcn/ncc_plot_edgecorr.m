@@ -1,5 +1,18 @@
 function ncc_plot_edgecorr(ncc_out,cogLabels,sysLabels,bs,sc)
-
+%%                   NCC Plot Edge-Level Matrices                   %%
+% INPUTS
+%   ncc_out      -> Data structure output by the fcn_netcontcorr code 
+%   cogLabels    -> Cell variable where each element is a text label for
+%                   the behavioral domains correlated with FCc in the main code.
+%   sysLabels    -> Cell variable where elements are text labels for the
+%                   blocks used in the main code.
+%   bs           -> A vector of indices for which component blocks/bins you
+%                   want the blocks plotted.
+%   sc           -> A vector of indices for which behaviors/cognitive domains
+%                   you want the blocks plotted.
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
+%%
 narginchk(3,5)
 
 load('fcn/colormaps.mat','bluered_cmap')
@@ -40,5 +53,5 @@ for sc_idx = 1:length(sc)
         ncc_bLabels_onEdgemat(sysLabels,ncc_out.block_idx)
         colormap(bluered_cmap); colorbar
     end
-    sgtitle({[cogLabels{sc(sc_idx)} ' Blocks p<=0.05 ' ncc_out.corr_type ' adjusted'],' '}); 
+    sgtitle({[cogLabels{sc(sc_idx)} ' Blocks p<=' num2str(corr_thr) ' ' ncc_out.corr_type ' adjusted'],' '}); 
 end
