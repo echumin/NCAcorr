@@ -16,6 +16,7 @@ function [FCcomponents, block_idx,dis,RSSall] = fcn_binRSS(ts,sys_aff,binSets)
 %                   reordered time series.
 %   dis          -> nubmer of time points separation between adjacent
 %                   points within RSS bins.
+%   RSSall       -> timepoint-by-subject matrix of RSS values.
 %
 % Evgeny Jenya Chumin, 2023, Indiana University
 %%

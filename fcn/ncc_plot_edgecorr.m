@@ -55,3 +55,4 @@ for sc_idx = 1:length(sc)
     end
     sgtitle({[cogLabels{sc(sc_idx)} ' Blocks p<=' num2str(corr_thr) ' ' ncc_out.corr_type ' adjusted'],' '}); 
 end
+
