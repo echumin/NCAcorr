@@ -1,4 +1,5 @@
 function a = fcn_edgets(ts,zflag)
+% Richard Betzel, Indiana University
 if nargin == 1
     zflag = true;
 end

@@ -1,5 +1,22 @@
 function [sig_block_idx] = ncc_plot_blocks(ncc_out,cogLabels,sysLabels,bs,sc)
-
+%%                   NCC Plot Blocks                   %%
+% INPUTS
+%   ncc_out      -> Data structure output by the fcn_netcontcorr code 
+%   cogLabels    -> Cell variable where each element is a text label for
+%                   the behavioral domains correlated with FCc in the main code.
+%   sysLabels    -> Cell variable where elements are text labels for the
+%                   blocks used in the main code.
+%   bs           -> A vector of indices for which component blocks/bins you
+%                   want the blocks plotted.
+%   sc           -> A vector of indices for which behaviors/cognitive domains
+%                   you want the blocks plotted.
+%
+% OUTPUTS
+%   sig_block_idx -> a cell value where elements are behavior-FCcomponent
+%                   pair indices that contain an indxed of significant network blocks.
+%
+% Evgeny Jenya Chumin, 2023, Indiana University
+%%
 narginchk(3,5)
 
 load('fcn/colormaps.mat','red_cmap')
@@ -47,6 +64,6 @@ for sc_idx = 1:length(sc)
         xlabel([]);
         ylim([0.5 (nSys+.5)]); xlim([0.5 (nSys+.5)])
     end
-    sgtitle({[cogLabels{sc(sc_idx)} ' *p<=0.05 ' ncc_out.corr_type ' adjusted'],' '}); 
+    sgtitle({[cogLabels{sc(sc_idx)} ' *p<=' num2str(corr_thr) ' ' ncc_out.corr_type ' adjusted'],' '}); 
 end
 
